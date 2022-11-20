@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本事件处理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!--
+        基本使用:
+            1. 使用v-on:xxx或@xxx
+            2. 在methods定义回调函数
+            3. 不要用箭头函数.
+            4. @click($event)
+        事件函数如何传递参数?
+            1. 使用$event占位符号。
+    -->
+    <div id="root">
+        <h2>欢迎来到{{name}}!</h2>
+        <button v-on:click="showInfo1">点我提示信息1(不传参)</button>
+        <br>
+        <button @click="showInfo2(66, $event)">点我提示信息2</button>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: 'VueShcool'
+        },
+        methods:{
+            showInfo1(event){
+                console.log(event.target)
+                console.log(this === vm) //此处this 是vm, 所以Vue管理的函数不要写箭头函数.
+                ///alert('hello sanmazi')
+            },
+            showInfo2(number, a){
+                //console.log(event.target)
+                console.log(this === vm) //此处this 是vm, 所以Vue管理的函数不要写箭头函数.
+                alert('hello sanmazi2')
+                console.log(number, a)
+            },
+        }
+    })    
+</script>
+</html>

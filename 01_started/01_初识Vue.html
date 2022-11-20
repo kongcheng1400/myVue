@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入Vue: 开发版本/生产版本-->
+    <title>初识Vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!--
+        初识Vue
+        1. 让Vue工作，必须创建一个Vue实例，并且传入一个配置对象
+        2. demo容器里面的代码被称为 Vue模版
+        3. 容器与Vue实例一一对应.实际开发中只有一个Vue实例，并且配合组件一起使用.
+        4. {{xxx}} xxxJS表达式
+    -->
+    <div id="demo">
+        <h1>Hello, {{name.toUpperCase()}}, at {{address}}!</h1>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //阻止生产提示
+        //创建Vue实例.
+        new Vue({
+            el: '#demo', //el:用于指定当前Vue实例为哪个容器服务，值通常为CSS选择器字符串. 或者document.getElementById('root')
+            data: {//存储数据，供el指定的容器使用.先写成一个对象
+                name: 'sanmazi',
+                address: 'Shenzhen'
+            }
+        })
+    </script>
+    <!-- 准备好一个容器-->
+
+</body>
+</html>

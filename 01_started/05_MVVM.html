@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVVM</title>
+    <script type="text/javascript" src="../js/vue.js"> </script>
+</head>
+<body>
+    <!--
+        1. M: model: data中的数据
+        2. V: 视图：模版代码
+        3. VM: viewmodel: Vue实例
+    -->
+    <div id="root"> <!--View-->
+        <h1>学校名称:{{name}}</h1>
+        <h1>学校地址:{{address}}</h1>
+        <h1>test1:{{$options}}</h1>
+        <h1>test2: {{$emit}}</h1>
+    </div>
+    
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({//ViewModel 所以经常用VM表示Vue实例.
+        el: '#root',
+        data: {//Model
+            name: 'Vue School',
+            address: 'Shenzhen'
+        }
+    })
+    console.log(vm)
+</script>
+</html>

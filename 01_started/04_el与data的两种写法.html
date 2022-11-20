@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!--
+        两种写法:
+        1. el
+        2. 之后mount
+        使用v.$mount灵活一点点.
+        data的两种写法: 
+            1. 配置data对象
+            2. 写成data()函数返回. 不能写成箭头函数，this是window.
+            3. 由vue写成的函数.
+    -->
+    <div id="demo">
+    <h1> hello, {{name}}!</h1>
+    </div>
+    
+</body>
+<script type="text/javascript">
+    const v = new Vue({
+        el: "#demo", //el第一种写法
+        //data的第一种写法
+        /*
+        data: {
+            name: 'world'
+        },
+        */
+        //data的第二种写法函数法.
+        //不能写成箭头函数.
+        data(){ //简写
+        //data:function() {
+            console.log('@@@', this)
+            return {
+                name: 'world'
+            }
+        }
+    })
+    //setTimeout(() => {v.$mount('#demo')}, 1000) //第二种写法.
+    
+</script>
+</html>

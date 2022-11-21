@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘事件</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1. 键盘事件，及别名
+            回车 => enter
+            删除 => delete
+            退出 => esc
+            空格 => space
+            换行 => tab
+            上下左右 => up down left right
+        2. Vue未提供别名的按键，可以使用按键原始的key去绑定，注意要使用短横线命名kebab-case
+
+    -->
+    <div id="root">
+        <h2>welcome to {{name}}!</h2>
+        <input type="text" placeholder="按下回车提示输入" @keyup="showInfo">
+    </div>
+    
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#root',
+        data: {
+            name: 'VueSchool'
+        },
+        methods: {
+            showInfo(e){
+                /*使用了@keyup.enter 别名，则不需要判断enter.
+                if (e.keyCode !== 13) {
+                    return
+                }
+                */
+                console.log(e.key, e.keyCode)
+                //console.log(e.target.value)
+            }
+        },
+    })
+</script>
+</html>

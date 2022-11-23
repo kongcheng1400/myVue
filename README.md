@@ -32,3 +32,18 @@ ES6语法规范，ES6模块化，原型，原型链，axios, promis
 2条路径: DOM listeners, Data Bindings
 
 ### 数据代理：
+
+## 知识点
+
+### Vue的属性配置及知识点
+- el
+- data
+  - 插值语法
+  - 数据绑定v-bind
+  - 双向绑定v-model
+- methods
+  - 事件处理
+- computed
+  - 计算属性
+- watch
+  - 深度监视

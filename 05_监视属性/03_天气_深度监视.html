@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+
+<body>
+    <!--
+        深度监视: deep:true 对象内部的属性值的变化.
+    -->
+    <div id="root">
+        <h2>今天天气好{{info}}</h2>
+        <button @click="changeWhether">切换天气</button>
+        <hr>
+        <h3>a的值是:{{numbers.a}}</h3>
+        <button @click="numbers.a++">点我a+1</button>
+    </div>
+
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true,
+            numbers: {
+                a: 1,
+                b: 1
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '热' : '凉爽'
+            }
+        },
+        methods: {
+            changeWhether() {
+                this.isHot = !this.isHot
+            }
+        },
+        watch: {
+            //也能监测info
+            isHot: {
+                //初始化时让handler调用一下
+                //immediate: true,
+                //当isHot发生改变
+                handler(newValue, oldValue) {
+                    console.log('isHot 修改了', newValue, oldValue)
+                }
+            },
+            //注意对象的属性都是字符串
+            //监视多级结构的某个属性的变化.
+            'numbers.a': {
+                handler() {
+                    console.log('a改变了')
+                }
+            },
+            //深度监视.
+            'numbers': {
+                deep:true,
+                handler() {
+                    console.log('a改变了')
+                }
+            },
+        }
+    })
+    //第二种监视方法
+    /*
+    vm.$watch('isHot', {
+        //初始化时让handler调用一下
+        immediate: true,
+        //当isHot发生改变
+        handler(newValue, oldValue) {
+            console.log('isHot 修改了', newValue, oldValue)
+        }
+    })
+    */
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+
+<body>
+    <!--
+        深度监视: deep:true 对象内部的属性值的变化.
+    -->
+    <div id="root">
+        <h2>今天天气好{{info}}</h2>
+        <button @click="changeWhether">切换天气</button>
+        <hr>
+    </div>
+
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true
+        },
+        computed: {
+            info() {
+                return this.isHot ? '热' : '凉爽'
+            }
+        },
+        methods: {
+            changeWhether() {
+                this.isHot = !this.isHot
+            }
+        },
+        watch: {
+            //配置项只有handler 就可以简写.
+            /*
+            isHot: {
+                //初始化时让handler调用一下
+                //immediate: true,
+                //deep:true,
+                //当isHot发生改变
+                handler(newValue, oldValue) {
+                    console.log('isHot 修改了', newValue, oldValue)
+                }
+            }*/
+            //简写
+            isHot(newValue, oldValue){
+                console.log('isHot 修改了', newValue, oldValue)
+            }
+        }
+    })
+    //第二种监视方法
+    /*
+    vm.$watch('isHot', {
+        //初始化时让handler调用一下
+        immediate: true,
+        //当isHot发生改变
+        handler(newValue, oldValue) {
+            console.log('isHot 修改了', newValue, oldValue)
+        }
+    })
+    */
+   //不要写箭头函数，箭头函数中的this是window
+   vm.$watch('isHot', function(newValue, oldValue){console.log('isHot 修改了', newValue, oldValue)})
+</script>
+
+</html>

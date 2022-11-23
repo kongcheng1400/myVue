@@ -52,7 +52,8 @@
         <a href="wwww.baidu.com" @click.prevent="showInfo">点我提示信息</a>
         <!--阻止事件冒泡-->
         <div class="demo1" @click="showInfo">
-            <button @click.stop="showInfo">点我提示信心</button>
+            <!--<button @click.stop="showInfo">点我提示信心</button>-->
+            <button @click.stop.prevent="showInfo">点我提示信心</button>
         </div>
         <button @click.once="showInfo">点我提示信心</button>
 

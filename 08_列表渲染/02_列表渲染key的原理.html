@@ -13,28 +13,19 @@
 
 <body>
     <!--
-        使用V-for指令 可以遍历数组，字符串，对象和指定次数
+        1. 使用V-for指令 可以遍历数组，字符串，对象和指定次数
+        2. key:给DOM节点做标志.
     -->
     <div id="root">
         <h2>人员列表</h2>
+        <button @click="add">添加一个老刘</button>
         <ul>
-            <!--  多个参数加个小括号  遍历列表/数组-->
-            <li v-for="(p, index) in persons" :key="index">
+            <!--  多个参数加个小括号  遍历列表/数组
+                1. key不能用index(对数据进行破坏顺序的操作会出问题).应该使用p.id(唯一)
+            -->
+            <li v-for="(p, index) in persons" :key="p.id">
                 {{p.name}}-{{p.age}}
-            </li>
-        </ul>
-
-        <ul>
-            <!--  多个参数加个小括号  遍历对象-->
-            <li v-for="(v, k) in car" :key="k">
-                {{k}}-{{v}}
-            </li>
-        </ul>
-
-        <ul>
-            <!--  多个参数加个小括号  遍历字符串-->
-            <li v-for="(v, k) in str" :key="k">
-                {{k}}-{{v}}
+                <input type="text">
             </li>
         </ul>
     </div>
@@ -48,13 +39,13 @@
                 { id: '001', name: "章三", age: 18 },
                 { id: '002', name: "李四", age: 19 },
                 { id: '003', name: "王五", age: 20 }
-            ],
-            car: {
-                name: 'Audi A8',
-                color: 'black',
-                price: '80W'
-            },
-            str: 'HELLO'
+            ]
+        },
+        methods:{
+            add() {
+                const p = {id:'004', name: '老刘', age: 40}
+                this.persons.unshift(p)
+            }
         }
     })
 </script>

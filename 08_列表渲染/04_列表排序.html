@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_列表排序</title>
+    <script type="text/javascript" src="../js/vue.js">
+
+    </script>
+</head>
+
+<body>
+    <!--
+        1. 使用V-for指令 可以遍历数组，字符串，对象和指定次数
+        2. key:给DOM节点做标志.
+    -->
+    <div id="root">
+        <h2>人员列表</h2>
+        <input type="text" placeholder="请输入名字" v-model="keyword">
+        <button @click="sortType = 2">年龄生序</button>
+        <button @click="sortType = 1">年龄降序</button>
+        <button @click="sortType = 0">原顺序</button>
+        <ul>
+            <!--  多个参数加个小括号  遍历列表/数组
+                1. key不能用index(对数据进行破坏顺序的操作会出问题).应该使用p.id(唯一)
+            -->
+            <li v-for="(p, index) in result" :key="p.id">
+                {{p.name}}-{{p.age}}--{{p.sex}}
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script type="text/javascript">
+   new Vue({
+    el: '#root',
+    data: {
+            keyword: '',
+            sortType:0, //
+            persons: [
+                { id: '001', name: "马冬梅", age: 24, sex: '女' },
+                { id: '002', name: "周冬雨", age: 19, sex: '男' },
+                { id: '003', name: "周杰伦", age: 22, sex: '男' },
+                { id: '004', name: "温兆伦", age: 28, sex: '女' },
+            ]
+        },
+        methods: {
+        },
+        computed:{
+            result(){
+                filtered =  this.persons.filter((p) => {
+                        return p.name.indexOf(this.keyword) !== -1
+                    })
+
+                if(this.sortType !== 0) {
+                    filtered.sort((a, b) => {
+                        return this.sortType === 1 ? a.age - b.age : b.age - a.age
+                    })
+                }
+                return filtered
+            }
+        }
+   })
+
+</script>
+
+</html>

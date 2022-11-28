@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_更新及监视总结</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!--
+        监视数据的原理:
+            1. 如何监测对象中的数据?
+                通过setter实现监视，并且要在new Vue时传入要监测的数据.
+                如果是后追加的属性，Vue默认不做响应式处理
+                如需做响应式处理:使用:
+                    Vue.set(target, key, val) 或者vm.$set(target, key, val)
+            2. 修改数组中的某个元素:
+                1. 使用这些api push(), pop(), shift(), unshift(), splice(), sort(), reverse()
+            
+    -->
+    <div id="root">
+        <h1>学生信息</h1>
+        <button @click="student.age++">年龄+1</button> <br/>
+        <button @click="addSex">添加性别，默认 男</button> <br/>
+        <button @click="student.sex = '未知'">修改性别</button><br>
+        <button @click="addFriend">列表首位添加一个朋友</button> <br/>
+        <button @click="updateFirstFriendName">修改第一个朋友的名字为:章三</button> <br>
+        <button @click="addHobby">添加一个爱好为: 开车</button> <br>
+        <button @click="updateHobby">修改爱好</button>
+
+        <h3>姓名: {{student.name}}</h3>
+        <h3>年龄: {{student.age}}</h3>
+        <h4 v-if="student.sex">性别: {{student.sex}}</h4>
+        <h3>爱好:</h3>
+        <ul>
+            <li v-for="(h, index) in student.hobby" :key="index">
+                {{h}}
+            </li>
+        </ul>
+        <h3>朋友们:</h3>
+        <ul>
+            <li v-for="(f, index) in student.friends" :key="index">
+                {{f.name}}---{{f.age}}
+            </li>
+        </ul>
+
+    </div>
+    
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#root',
+        data: {
+            student: {
+                name: 'sanmazi',
+                age: '23',
+                hobby: [
+                '编程', '篮球', 'ktv'
+            ],
+            friends: [
+                {name: '里斯', age: '33'},
+                {name: '王五', age: '25'},
+                {name: '赵六', age: '40'}
+            ]
+            },
+
+        },
+        methods:{
+                addSex(){
+                    //2种写法
+                    //Vue.set(this.student, 'sex', 'Male')
+                    this.$set(this.student, 'sex', 'Male')
+                },
+                addFriend(){
+                    this.student.friends.unshift({name: 'jack', age: '40'})
+                },
+                updateFirstFriendName(){
+                    this.student.friends[0].name = '章三'
+                },
+                addHobby(){
+                    this.student.hobby.unshift('烫头')
+                },
+                addHobby() {
+                    this.student.hobby.splice(0,1, '开车')
+                    //Vue.set(this.student.hobby, 0, '开车')
+                    //this.$set(this.student.hobby, 0, '开车')
+                }
+        }
+    })
+</script>
+</html>

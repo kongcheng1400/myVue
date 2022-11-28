@@ -31,6 +31,11 @@ ES6语法规范，ES6模块化，原型，原型链，axios, promis
 
 2条路径: DOM listeners, Data Bindings
 
+两个核心:
+1. 虚拟DOM,
+2. 对比然后更新.(v-bind:key) 唯一ID
+
+
 ### 数据代理：
 
 ## 知识点
@@ -47,5 +52,7 @@ ES6语法规范，ES6模块化，原型，原型链，axios, promis
   - 计算属性
 - watch
   - 深度监视
-
-### 
+- v-for
+  - 列表更新渲染
+### Vue的数据更新原理
+data => vm._data() vm.data
